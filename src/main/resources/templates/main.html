@@ -6,15 +6,19 @@
 </head>
 
 <body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
 <div>
-    <form method="post" action="message">
+    <form method="post">
         <input type="text" name="text" placeholder="Enter message"/>
         <input type="text" name="tag" placeholder="Enter tag"/>
         <button type="submit">Add</button>
     </form>
 </div>
 
-<form method="post" action="filter">
+<form method="post" th:action="@{/filter}">
     <input type="text" name="filter" placeholder="Filter"/>
     <button type="submit">Search</button>
 </form>

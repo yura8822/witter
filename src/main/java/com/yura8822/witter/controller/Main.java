@@ -13,19 +13,24 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class GreetingController {
+public class Main {
 
     @Autowired
     private MessageRepo messageRepo;
 
-    @GetMapping
+    @GetMapping("/")
+    public String greeting(){
+        return "greeting";
+    }
+
+    @GetMapping("/main")
     public String main(Map<String, Object> model) {
         List<Message> messages = messageRepo.findAll();
         model.put("messages", messages);
         return "main";
     }
 
-    @PostMapping("message")
+    @PostMapping("/main")
     public String add(@RequestParam String text, @RequestParam String tag,
                       Map<String, Object> model) {
         Message message = new Message(text, tag);
@@ -35,7 +40,7 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping("filter")
+    @PostMapping("/filter")
     public String filter(@RequestParam String filter, Map<String, Object> model) {
         List<Message> messages = null;
         if (filter != null && !filter.isEmpty()) {
