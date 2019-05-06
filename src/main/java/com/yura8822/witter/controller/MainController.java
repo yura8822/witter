@@ -1,8 +1,10 @@
 package com.yura8822.witter.controller;
 
 import com.yura8822.witter.domain.Message;
+import com.yura8822.witter.domain.User;
 import com.yura8822.witter.repo.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class Main {
+public class MainController {
 
     @Autowired
     private MessageRepo messageRepo;
@@ -31,9 +33,10 @@ public class Main {
     }
 
     @PostMapping("/main")
-    public String add(@RequestParam String text, @RequestParam String tag,
+    public String add(@AuthenticationPrincipal User user,
+                      @RequestParam String text, @RequestParam String tag,
                       Map<String, Object> model) {
-        Message message = new Message(text, tag);
+        Message message = new Message(text, tag, user);
         messageRepo.save(message);
         List<Message> messages = messageRepo.findAll();
         model.put("messages", messages);
