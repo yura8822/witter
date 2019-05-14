@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Witter user list</title>
+</head>
+<body>
+<h1>List of users</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th></th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text= "${{user.roles}}"</td>
+        <td><a th:href="@{/user/{id}(id=${user.id})}"/>Edit</td>
+    </tr>
+</table>
+
+</body>
+</html>
+
