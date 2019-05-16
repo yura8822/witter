@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head>
-    <meta charset="UTF-8">
-    <title>Witter user edit</title>
-</head>
+
+<head th:insert="~{fragment/generalFragment:: head}"></head>
+
 <body>
 <h1>User editor</h1>
 <form th:action="@{/user}" method="post">
@@ -15,6 +14,9 @@
     <input type="hidden" th:value="${user.id}" name="userId">
     <button type="submit">Save</button>
 </form>
+
+<div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
+
 </body>
 </html>
 

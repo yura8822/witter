@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Witter registration</title>
-</head>
+
+<head th:insert="~{fragment/generalFragment:: head}"></head>
+
 <body>
 
 <div th:if="${param.error}">
@@ -22,6 +21,8 @@
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Add"/></div>
 </form>
+
+<div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
 
 </body>
 </html>
