@@ -228,3 +228,15 @@ Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
 	... 90 more
+2019-05-24 21:07:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (319)"
+Value too long for column """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (319)"; SQL statement:
+insert into message (user_id, filename, tag, text, id) values (?, ?, ?, ?, ?) [22001-199]
+2019-05-24 21:07:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (319)"
+Value too long for column """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (319)"; SQL statement:
+insert into message (user_id, filename, tag, text, id) values (?, ?, ?, ?, ?) [22001-199]
+2019-05-24 21:08:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (316)"
+Value too long for column """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (316)"; SQL statement:
+insert into message (user_id, filename, tag, text, id) values (?, ?, ?, ?, ?) [22001-199]

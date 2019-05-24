@@ -53,7 +53,7 @@ public class MainController {
         Message message = new Message(text, tag, user);
         if(file != null && !file.getOriginalFilename().isEmpty()){
             File uploadDirect = new File(uploadPath);
-            if(uploadDirect.exists()){
+            if(!uploadDirect.exists()){
                 uploadDirect.mkdir();
             }
             String uuodFile = UUID.randomUUID().toString();

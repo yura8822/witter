@@ -1,47 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:insert="~{fragment/generalFragment:: head}"></head>
 
 <body>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-    <span><a href="/user">User list</a></span>
-</div>
+<nav th:insert="~{fragment/navBar:: navbar}"></nav>
+<div class="container" style="margin-top: 100px;">
 
-<div>
+    <form method="get" class="form-inline mb-4">
+        <input type="text" name="filter" th:value="${filter}" class="form-control" placeholder="Search"/>
+        <button type="submit" class="btn btn-primary col-sm-2 ml-2">Search</button>
+    </form>
+
     <form method="post" enctype="multipart/form-data">
-        <input type="text" name="text" placeholder="Enter message"/>
-        <input type="text" name="tag" placeholder="Enter tag"/>
-        <input type="file" name="file"/>
-        <button type="submit">Add</button>
-    </form>
-</div>
-
-<form method="get">
-    <input type="text" name="filter" th:value="${filter}" placeholder="Filter"/>
-    <button type="submit">Search</button>
-</form>
-
-<div>List message</div>
-
-<div>
-    <table th:each="message : ${messages}">
-        <tr>
-            <td><b th:text="${message.id}"> ID </b></td>
-            <td><span th:text="${message.text}"> Text </span></td>
-            <td><i th:text="${message.tag}"> Tag </i></td>
-            <td><strong th:text="${message.author.username}">Author</strong></td>
-        </tr>
-        <div th:if="${message.filename} != null">
-            <img th:src="${'/img/' + message.filename}">
+        <div class="form-group">
+            <input type="text" name="text" class="form-control" placeholder="Enter message"/>
         </div>
-    </table>
-</div>
+        <div class="form-group">
+            <input type="text" name="tag" class="form-control col-sm-5" placeholder="Enter tag"/>
+        </div>
+        <div class="custom-file col-sm-3">
+            <input type="file" name="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary col-sm-2">Add</button>
+        </div>
+    </form>
 
-<div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
+    <h3 class="mt-5">List message</h3>
+
+    <div class="card-columns">
+        <div th:each="message : ${messages}">
+            <div class="card border-info m-3" style="width: 18rem;">
+                <div th:if="${message.filename} != null">
+                    <img class="card-img-top" th:src="${'/img/' + message.filename}">
+                </div>
+                <div class="text-info m-2">
+                    <p th:text ="${message.text}"></p>
+                    <p th:text="${message.tag}" class="text-danger"></p>
+                </div>
+                <div class="card-footer text-muted text-primary">
+                    <p th:text="${message.author.username}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
+</div>
 
 </body>
 

@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:insert="~{fragment/generalFragment:: head}"></head>
 
 <body>
-<h1>User editor</h1>
-<form th:action="@{/user}" method="post">
-    <input type="text" th:value="${user.username}" name="username">
-    <div th:each="role : ${roles}">
-        <input type="checkbox" th:name="${role}" th:checked="${#arrays.contains(user.roles, role)}"/>
-        <label th:text="${role}"></label>
-    </div>
-    <input type="hidden" th:value="${user.id}" name="userId">
-    <button type="submit">Save</button>
-</form>
+<nav th:insert="~{fragment/navBar:: navbar}"></nav>
+<div class="container" style="margin-top: 100px;">
+    <h1>User editor</h1>
+    <form th:action="@{/user}" method="post">
+        <input type="text" th:value="${user.username}" name="username">
+        <div th:each="role : ${roles}">
+            <input type="checkbox" th:name="${role}" th:checked="${#arrays.contains(user.roles, role)}"/>
+            <label th:text="${role}"></label>
+        </div>
+        <input type="hidden" th:value="${user.id}" name="userId">
+        <button type="submit">Save</button>
+    </form>
 
-<div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
-
+    <div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
+</div>
 </body>
 </html>
 

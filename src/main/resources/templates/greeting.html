@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:insert="~{fragment/generalFragment:: head}"></head>
 
 <body>
+<nav th:insert="~{fragment/navBar:: navbar}"></nav>
+<div class="container" style="margin-top: 100px;">
 
-<div>Hello, user</div>
+    <h5>Implemented on spring, thymeleaf and bootstrap</h5>
+    <h4>Thanks to letsCode channel!!!</h4>
 
-<a th:href="@{/main}">Main page</a>
-
-<div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
-
+    <div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
+</div>
 </body>
 
 </html>

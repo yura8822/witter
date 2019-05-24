@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar fixed-top navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand" href="/">Witter</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/main">Messages <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                <a class="nav-link" href="/user">User list <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <span class="navbar-text" sec:authorize="isAuthenticated() == false">
+            Hello, guest!
+        </span>
+
+        <div  sec:authorize="isAuthenticated()">
+            <span class="navbar-text" th:text="${'Hello, '+#authentication.name+'!'}"></span>
+        </div>
+
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <input type="submit" value="Sign Out"  class="btn btn-primary ml-2"/>
+        </form>
+    </div>
+</nav>
+</body>
+</html>

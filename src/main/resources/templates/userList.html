@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:insert="~{fragment/generalFragment:: head}"></head>
 
 <body>
-<h1>List of users</h1>
+<nav th:insert="~{fragment/navBar:: navbar}"></nav>
+<div class="container" style="margin-top: 100px;">
+    <h1>List of users</h1>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th></th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.username}"></td>
-        <td th:text= "${{user.roles}}"</td>
-        <td><a th:href="@{/user/{id}(id=${user.id})}"/>Edit</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text= "${{user.roles}}"</td>
+            <td><a th:href="@{/user/{id}(id=${user.id})}"/>Edit</td>
+        </tr>
+    </table>
 
-<div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
-
+    <div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
+</div>
 </body>
 </html>
 
