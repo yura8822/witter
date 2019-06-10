@@ -20,6 +20,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 	runtimeOnly 'com.h2database:h2'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

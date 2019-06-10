@@ -21,6 +21,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role>roles;
 
+    private String email;
+    private String activationCode;
+
     public User() {
     }
 
@@ -87,5 +90,21 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 }

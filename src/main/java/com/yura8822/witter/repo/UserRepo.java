@@ -10,4 +10,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query("select u from User u where u.id = ?1")
     User findByUserID(Long id);
+
+    @Query("select u from User u where u.activationCode=?1")
+    User findByUserActivateCode(String uuid);
 }

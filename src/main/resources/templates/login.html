@@ -14,6 +14,9 @@
         You have been logged out.
     </div>
     <h1>Login page</h1>
+
+    <td th:text="${message}"/>
+
     <form th:action="@{/login}" method="post">
         <div class="form-group row">
             <label for="username" class="col-sm-2 col-form-label">User name</label>
