@@ -1,6 +1,9 @@
 package com.yura8822.witter.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Message {
@@ -8,8 +11,14 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @NotBlank(message = "please enter a message")
+    @Length(max = 2048, message = "Message to long(no more than 2048)")
     private String text;
+
+    @NotBlank(message = "please enter a tag")
+    @Length(max = 255, message = "Tag to long(no more than 255)")
     private String tag;
+
     private String filename;
 
     @ManyToOne(fetch = FetchType.EAGER)

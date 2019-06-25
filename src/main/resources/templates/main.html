@@ -13,16 +13,24 @@
     </form>
 
     <form method="post" enctype="multipart/form-data">
+
         <div class="form-group">
-            <input type="text" name="text" class="form-control" placeholder="Enter message"/>
+            <input type="text" name="text" th:class="${textError != null} ? 'form-control is-invalid' : 'form-control'"
+                   placeholder="Enter message" th:value="${textError != null or tagError != null} ? ${message.text} : ''"/>
+            <div th:if="${textError != null}" class="invalid-feedback" th:text="${textError}"></div>
         </div>
+
         <div class="form-group">
-            <input type="text" name="tag" class="form-control col-sm-5" placeholder="Enter tag"/>
+            <input type="text" name="tag" th:class="${tagError != null} ? 'form-control col-sm-5 is-invalid' : 'form-control  col-sm-5'"
+                   placeholder="Enter tag" th:value="${tagError != null or textError != null} ? ${message.tag} : ''"/>
+            <div th:if="${tagError != null}" class="invalid-feedback" th:text="${tagError}"></div>
         </div>
+
         <div class="custom-file col-sm-3">
             <input type="file" name="file" class="custom-file-input" id="customFile">
             <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
+
         <div class="form-group mt-3">
             <button type="submit" class="btn btn-primary col-sm-2">Add</button>
         </div>

@@ -240,3 +240,11 @@ insert into message (user_id, filename, tag, text, id) values (?, ?, ?, ?, ?) [2
 org.h2.jdbc.JdbcSQLDataException: Значение слишком длинное для поля """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (316)"
 Value too long for column """TEXT"" VARCHAR(255)": "STRINGDECODE('Go , \u0442\u0430\u043a\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u044b\u0439 \u043a\u0430\u043a Gola... (316)"; SQL statement:
 insert into message (user_id, filename, tag, text, id) values (?, ?, ?, ?, ?) [22001-199]
+2019-06-24 19:53:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "LTER[*] TABLE MESSAGE MODIFY TEXT VARCHAR(2048)"
+Syntax error in SQL statement "LTER[*] TABLE MESSAGE MODIFY TEXT VARCHAR(2048)"; SQL statement:
+LTER TABLE MESSAGE MODIFY TEXT VARCHAR(2048) [42000-199]
+2019-06-24 19:53:41 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "LTER[*] TABLE MESSAGE MODIFY TEXT VARCHAR(2048)"
+Syntax error in SQL statement "LTER[*] TABLE MESSAGE MODIFY TEXT VARCHAR(2048)"; SQL statement:
+LTER TABLE MESSAGE MODIFY TEXT VARCHAR(2048) [42000-199]
