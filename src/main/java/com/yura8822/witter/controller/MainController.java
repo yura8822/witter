@@ -70,6 +70,7 @@ public class MainController {
                 file.transferTo(new File(uploadPath + "/" +resultFileName));
                 message.setFilename(resultFileName);
             }
+            model.addAttribute("message", null);
             messageRepo.save(message);
         }
 
