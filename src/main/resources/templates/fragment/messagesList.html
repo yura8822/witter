@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="messagesList">
+
+    <h3 class="mt-5">List message</h3>
+
+    <div class="card-columns">
+        <div th:each="message : ${messages}">
+            <div class="card border-info m-3">
+                <div th:if="${message.filename} != null">
+                    <img class="card-img-top" th:src="${'/img/' + message.filename}">
+                </div>
+                <div class="text-info m-2">
+                    <p th:text ="${message.text}"></p>
+                    <p th:text="${message.tag}" class="text-danger"></p>
+                </div>
+                <div class="card-footer text-muted text-primary">
+                    <p th:text="${message.author.username}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

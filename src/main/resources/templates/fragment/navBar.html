@@ -21,6 +21,10 @@
                 <a class="nav-link" href="/main">Messages <span class="sr-only">(current)</span></a>
             </li>
 
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{'/user-messages/' + ${#authentication.getPrincipal().getId()}}">My messages <span class="sr-only">(current)</span></a>
+            </li>
+
             <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/user">User list <span class="sr-only">(current)</span></a>
             </li>

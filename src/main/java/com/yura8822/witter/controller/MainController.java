@@ -3,6 +3,7 @@ package com.yura8822.witter.controller;
 import com.yura8822.witter.domain.Message;
 import com.yura8822.witter.domain.User;
 import com.yura8822.witter.repo.MessageRepo;
+import com.yura8822.witter.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -26,6 +29,9 @@ public class MainController {
 
     @Autowired
     private MessageRepo messageRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     @Value("${upload.patch}")
     private String uploadPath;
@@ -78,4 +84,16 @@ public class MainController {
         model.addAttribute("messages", messages);
         return "main";
     }
+
+    @GetMapping("/user-messages/{userId}")
+    public String userMessages(@AuthenticationPrincipal User currentUser,
+                               @PathVariable String userId,
+                               Model model){
+        Long userIdLong = Long.parseLong(userId);
+        User user = userRepo.findByUserID(userIdLong);
+        Set<Message> messages = user.getMessages();
+        model.addAttribute("messages", messages);
+        return "userMessages";
+    }
+
 }
