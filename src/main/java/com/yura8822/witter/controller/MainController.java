@@ -92,7 +92,10 @@ public class MainController {
         Long userIdLong = Long.parseLong(userId);
         User user = userRepo.findByUserID(userIdLong);
         Set<Message> messages = user.getMessages();
+
         model.addAttribute("messages", messages);
+        model.addAttribute("checkedUser", user.equals(currentUser));
+
         return "userMessages";
     }
 
