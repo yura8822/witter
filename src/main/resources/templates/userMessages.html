@@ -7,11 +7,11 @@
 <nav th:insert="~{fragment/navBar:: navbar}"></nav>
 <div class="container" style="margin-top: 100px;">
 
-    <!--    <div th:replace="~{fragment/messageEdit:: messageEdit}"></div>-->
-
     <div th:if="${checkedUser==true}">
-        <div th:replace="~{fragment/messagesList:: messagesList}"></div>
+        <div th:replace="~{fragment/messageEdit:: messageEdit}"></div>
     </div>
+
+    <div th:replace="~{fragment/messagesList:: messagesList}"></div>
 
     <div th:replace="~{fragment/generalFragment:: bootstrap}"></div>
 </div>

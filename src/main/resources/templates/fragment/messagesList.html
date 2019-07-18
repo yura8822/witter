@@ -19,13 +19,15 @@
                     <p th:text ="${message.text}"></p>
                     <p th:text="${message.tag}" class="text-danger"></p>
                 </div>
-                <div class="card-footer text-muted text-primary">
-                    <p th:text="${message.author.username}"></p>
+                <div class="card-footer text-muted text-primary pb-4">
+                    <a th:href="@{'/user-messages/' + ${message.author.id}}" th:text="${message.author.username}"></a>
+                    <a class="btn btn-info float-right"
+                       th:if="${message.author.id}== ${#authentication.getPrincipal().getId()}"
+                       th:href="@{'/user-messages/' + ${message.author.id} +'?messageId='+ ${message.id}}">Edit</a>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </body>
 </html>

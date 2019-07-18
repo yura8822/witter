@@ -88,13 +88,59 @@ public class MainController {
     @GetMapping("/user-messages/{userId}")
     public String userMessages(@AuthenticationPrincipal User currentUser,
                                @PathVariable String userId,
-                               Model model){
-        Long userIdLong = Long.parseLong(userId);
-        User user = userRepo.findByUserID(userIdLong);
+                               Model model,
+                               @RequestParam(required = false) String messageId){
+        User user = userRepo.findByUserID(Long.parseLong(userId));
         Set<Message> messages = user.getMessages();
 
+        if (messageId != null){
+            model.addAttribute("message", messageRepo.findByMessageId(Integer.parseInt(messageId)));
+        }
+
         model.addAttribute("messages", messages);
-        model.addAttribute("checkedUser", user.equals(currentUser));
+        model.addAttribute("checkedUser", user.equals(currentUser) && messageId != null);
+
+        return "userMessages";
+    }
+
+    @PostMapping("/user-messages/{userId}")
+    public String edit(@AuthenticationPrincipal User currentUser,
+                       @Valid Message message,
+                       BindingResult bindingResult,
+                       Model model,
+                       @RequestParam("file") MultipartFile file,
+                       @PathVariable String userId,
+                       @RequestParam(required = false) String messageId) throws IOException {
+
+        User user = userRepo.findByUserID(Long.parseLong(userId));
+        Message byMessageId = null;
+        if (messageId != null) {
+            byMessageId = messageRepo.findByMessageId(Integer.parseInt(messageId));
+        }
+        message.setFilename(byMessageId.getFilename());
+
+        message.setAuthor(currentUser);
+
+        if (bindingResult.hasErrors()){
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("message", message);
+        }else {
+            if(file != null && !file.getOriginalFilename().isEmpty()){
+                File uploadDirect = new File(uploadPath);
+                if(!uploadDirect.exists()){
+                    uploadDirect.mkdir();
+                }
+                String uuodFile = UUID.randomUUID().toString();
+                String resultFileName = uuodFile + "." + file.getOriginalFilename();
+                file.transferTo(new File(uploadPath + "/" +resultFileName));
+                message.setFilename(resultFileName);
+            }
+            model.addAttribute("message", null);
+            messageRepo.save(message);
+        }
+        model.addAttribute("messages", user.getMessages());
+        model.addAttribute("checkedUser", user.equals(currentUser) && messageId != null);
 
         return "userMessages";
     }
