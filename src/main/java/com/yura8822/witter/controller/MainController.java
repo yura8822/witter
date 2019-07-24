@@ -140,7 +140,8 @@ public class MainController {
             messageRepo.save(message);
         }
         model.addAttribute("messages", user.getMessages());
-        model.addAttribute("checkedUser", user.equals(currentUser) && messageId != null);
+        model.addAttribute("checkedUser", user.equals(currentUser)
+                && messageId != null && bindingResult.hasErrors());
 
         return "userMessages";
     }
