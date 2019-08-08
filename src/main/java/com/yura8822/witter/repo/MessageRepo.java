@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MessageRepo extends JpaRepository<Message, Long> {
+    @Query("select m from Message m ORDER BY m.id DESC")
     List<Message> findAll();
 
     @Query("select m from Message m where m.tag = ?1")
