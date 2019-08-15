@@ -44,8 +44,12 @@ public class MessageController {
             model.addAttribute("message", messageRepo.findByMessageId(Integer.parseInt(messageId)));
         }
 
+        model.addAttribute("userChannel", user);
+        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
         model.addAttribute("messages", messages);
         model.addAttribute("checkedUser", user.equals(currentUser) && messageId != null);
+        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
+        model.addAttribute("subscribersCount", user.getSubscribers().size());
 
         return "userMessages";
     }
